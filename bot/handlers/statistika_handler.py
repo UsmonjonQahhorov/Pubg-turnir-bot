@@ -11,7 +11,7 @@ from bot.buttons.reply_buttons import main_menu_buttons, balance_panel
 from bot.buttons.text import info, statistics, turnir, balance, fill, back_menu, uzcard, humo, hamyon, tether, payeer, \
     withdraw, agree, cancel, turnir_stat
 from bot.dispatcher import dp, bot
-from db.model import Players, Exchange_rate
+from db.model import Players
 import json
 import pandas as pd
 

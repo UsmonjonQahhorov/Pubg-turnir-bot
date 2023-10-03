@@ -14,7 +14,7 @@ from bot.buttons.text import info, statistics, turnir, balance, fill, back_menu,
 from bot.dispatcher import dp, bot
 from bot.handlers.withdraw_balance import load_json_data
 # from bot.handlers.withdraw_balance import json_data
-from db.model import Players, Exchange_rate, Admins
+from db.model import Players, Admins
 import json
 
 
