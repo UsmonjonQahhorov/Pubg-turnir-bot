@@ -1,20 +1,17 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import CommandStart, Text
 
-# from bot.buttons.inline_buttons import agree_button
-from bot.buttons.reply_buttons import main_menu_buttons, turnir_panel
 from bot.buttons.text import info, statistics, turnir, balance, basic, pro, free, save, cancel, agree
 from bot.dispatcher import dp, bot
 from aiogram import types
 import asyncio
 from bot.buttons.inline_buttons import agree_button, agree_or_dis, agree_or_dis2, agree_or_dis3, \
     turnir_basic_begin, turnir_pro_begin
-# from .admin_menu import admins
 from db.model import User, Players, Basic, Free, Pro, Total, Admins
 
 
 async def main():
-    admins = await Admins.get_all_chat_ids()  # Assuming get_all_chat_ids is a coroutine
+    admins = await Admins.get_all_chat_ids()
     return admins
 
 
@@ -92,13 +89,7 @@ async def basicsave_handler(call: types.CallbackQuery, state: FSMContext):
                 tg_username=tg_username,
                 name=name
             )
-            # await Total.create(
-            #     chat_id=chat_id,
-            #     username=username,
-            #     tg_username=tg_username,
-            #     name=name,
-            #     priority="Basic"
-            # )
+
             text = (f"Turnir🏟 ishtirokchilari👤\n\n"
                     f"<b>USER CHAT_ID🆔 :{chat_id}"
                     f" USERNAME: {tg_username}"
@@ -115,8 +106,7 @@ async def basicsave_handler(call: types.CallbackQuery, state: FSMContext):
                              f" USERNAME: {total_u[i][0].username}"
                              f" NAME: {total_u[i][0].name}\n\n</b>"
                              f"TURNIR: Basic")
-                # print(text)
-                # -1001975309076
+
             await bot.edit_message_text(text=new_text, chat_id=session.chat.id, parse_mode="HTML",
                                         message_id=session.message_id, reply_markup=await turnir_basic_begin())
             await asyncio.sleep(2)
@@ -195,7 +185,7 @@ async def basicsave_handler(call: types.CallbackQuery, state: FSMContext):
             username = player[0].username
             tg_username = player[0].tg_username
             name = player[0].name
-            await Players.update2(user_id, balance=new_balance)  # Use the float value
+            await Players.update2(user_id, balance=new_balance)
             message = await call.message.answer(f"Pul yechib olindi✅ Hozirgi balance {new_balance}💲")
             await Pro.create(
                 chat_id=chat_id,
@@ -203,13 +193,7 @@ async def basicsave_handler(call: types.CallbackQuery, state: FSMContext):
                 tg_username=tg_username,
                 name=name
             )
-            # await Total.create(
-            #     chat_id=chat_id,
-            #     username=username,
-            #     tg_username=tg_username,
-            #     name=name,
-            #     priority="Pro"
-            # )
+
 
             text = (f"Turnir🏟 ishtirokchilari👤\n\n"
                     f"<b>USER CHAT_ID🆔 :{chat_id}"

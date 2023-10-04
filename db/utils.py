@@ -121,13 +121,6 @@ class AbstractClass:
         objects = await db.execute(query)
         return objects.all()
 
-    # @classmethod
-    # async def get_current_balance(cls, chat_id):
-    #     player = await cls.get_by_chat_id_str(chat_id)
-    #     if player:
-    #         return player.balance
-    #     return None
-
 
 class CreatedModel(Base, AbstractClass):
     __abstract__ = True

@@ -2,19 +2,17 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import CommandStart, Text
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-# from bot.buttons.inline_buttons import agree_button
 from bot.buttons.reply_buttons import main_menu_buttons, turnir_panel
 from bot.buttons.text import info, statistics, turnir, balance, basic, pro, free, save, cancel, done
 from bot.dispatcher import dp, bot
 from aiogram import types
 import asyncio
 from bot.buttons.inline_buttons import agree_or_dis, agree_or_dis2, done_button, agree_or_dis_free, turnir_free_begin
-# from .admin_menu import admins
 from db.model import User, Players, Basic, Free, Pro, Total, Admins
 
 
 async def main():
-    admins = await Admins.get_all_chat_ids()  # Assuming get_all_chat_ids is a coroutine
+    admins = await Admins.get_all_chat_ids()
     return admins
 
 
@@ -85,8 +83,7 @@ async def display_handler(msg: types.Message, state: FSMContext):
         await msg.answer("Saqlash✅ yoki Bekor qilish❌", reply_markup=key)
         await msg.delete()
         await state.set_state("save_state")
-        # await asyncio.sleep(15)
-        # await caption.delete()
+
 
 
 @dp.callback_query_handler(text="save", state="save_state")
@@ -98,7 +95,7 @@ async def handle_save(call: types.CallbackQuery, state: FSMContext):
         phone_num = data.get('phone_number')
         email = data.get('email')
 
-    # Ma'lumotlarni xabar yuborish
+
     message_text = f"<b>Yangi user PUBG turnirida royxatdan o'tdi📄\n\n" \
                    f"PUBG_ID🆔: {pubg_id}\n" \
                    f"Username: {username}\n" \

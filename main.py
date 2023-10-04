@@ -12,17 +12,18 @@ from middlewares import BigBrother
 
 async def create_all():
     await db.create_all()
+    await Players().create()
+    await Basic().create()
+    await Pro().create()
+    await Free().create()
+    await User().create()
+    await Admins().create()
+    await Total().create()
 
 
 if __name__ == "__main__":
     dp.middleware.setup(BigBrother())
     db.init()
-    # Players().create()
-    # Basic().create()
-    # Pro().create()
-    # Free().create()
-    # Exchange_rate().create()
-    # Total().create()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(create_all())
     executor.start_polling(dp, skip_updates=True)

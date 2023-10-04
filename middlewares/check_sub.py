@@ -23,14 +23,9 @@ class BigBrother(BaseMiddleware):
         result = "<i>Botdan foydalanish uchun quydagi kanallarga obuna bo'ling:</i\n>"
         final_status = True
         for channel in CHANNELS:
-            # print(f"channels: {channel}")
             status = await subscription.check(user_id=user, channel=channel)
-            # print(f"status: {status}")
+
             final_status *= status
-            # channel = await bot.get_chat(channel)
-            # if not status:
-            #     invite_link = await channel.export_invite_link()
-            #     result += (f"{channel.title}' 👉 {invite_link}✅")
 
         if not final_status:
             print(final_status)
@@ -40,6 +35,4 @@ class BigBrother(BaseMiddleware):
             except:
                 pass
 
-            # await update.message.answer(result, disable_web_page_preview=True, reply_markup=await member_buttons(),
-            #                             parse_mode="HTML")
             raise CancelHandler

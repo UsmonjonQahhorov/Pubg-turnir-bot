@@ -71,8 +71,3 @@ class Admins(CreatedModel):
     chat_id = Column(String(40))
     username = Column(String(50))
 
-
-# class Exchange_rate(CreatedModel):
-#     __tablename__ = "exchange_rate"
-#     id = Column(Integer, Sequence('admin_id_seq'), primary_key=True)
-#     currency = Column(Float())

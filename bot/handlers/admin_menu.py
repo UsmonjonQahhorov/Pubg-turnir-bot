@@ -4,17 +4,11 @@ from bot.buttons.reply_buttons import main_menu_buttons, admin_panel
 from bot.buttons.text import info, statistics, turnir, balance, back_menu, statistika, add_admin
 from bot.dispatcher import dp
 from aiogram import types, Bot
-# from db.jconfig import admin_panel, AdminPanel
 from db.model import Admins
-
-# admins = [1105995218]
-# admins_royxati = await main()
-#         for i in admins_royxati:
-
 
 
 async def main():
-    admins = await Admins.get_all_chat_ids()  # Assuming get_all_chat_ids is a coroutine
+    admins = await Admins.get_all_chat_ids()
     return admins
 
 
@@ -24,7 +18,7 @@ async def admin_handler(msg: types.Message, state: FSMContext):
     admins_royxati = await main()
     for i in admins_royxati:
         if i == admin_id:
-            admin_markup = await admin_panel()  # Call the admin_panel method
+            admin_markup = await admin_panel()
             await msg.answer(
                 text=f"<b>Assalomu alaykum {msg.from_user.full_name} siz adminsiz!</b>",
                 reply_markup=admin_markup,

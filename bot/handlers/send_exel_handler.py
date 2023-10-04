@@ -14,8 +14,6 @@ from db.model import User, Players, Basic, Free, Pro, Total, Admins
 import pandas as pd
 
 
-# @dp.message_handler(Text([free]), state="turnir")
-# await state.set_state("turnir_begin")
 @dp.callback_query_handler(lambda call: call.data.startswith("beg"))
 async def free_handler(call: types.CallbackQuery, state: FSMContext):
     data_from_database = await Basic.get_all()
@@ -24,7 +22,6 @@ async def free_handler(call: types.CallbackQuery, state: FSMContext):
     tg_username = [data_from_database[record][0].tg_username for record in range(len(data_from_database))]
     name = [data_from_database[record][0].name for record in range(len(data_from_database))]
 
-    # Create a dictionary to hold the data
     data_dict = {
         "chat_id": chat_ids,
         "Username": usernames,
@@ -34,17 +31,13 @@ async def free_handler(call: types.CallbackQuery, state: FSMContext):
         "summa": ""
     }
 
-    # Create a Pandas DataFrame from the dictionary
     df = pd.DataFrame(data_dict)
 
-    # Create an Excel writer using Pandas
     excel_file = "basic.xlsx"
     excel_writer = pd.ExcelWriter(excel_file, engine="openpyxl")
 
-    # Convert the DataFrame to an Excel sheet
     df.to_excel(excel_writer, index=False, sheet_name="Sheet1")
 
-    # Save the Excel file using the .save() method of the pandas ExcelWriter
     excel_writer._save()
     with open(excel_file, "rb") as f:
         input_file = InputFile(f)
@@ -64,7 +57,6 @@ async def free_handler(call: types.CallbackQuery, state: FSMContext):
     tg_username = [data_from_database[record][0].tg_username for record in range(len(data_from_database))]
     name = [data_from_database[record][0].name for record in range(len(data_from_database))]
 
-    # Create a dictionary to hold the data
     data_dict = {
         "chat_id": chat_ids,
         "Username": usernames,
@@ -74,17 +66,13 @@ async def free_handler(call: types.CallbackQuery, state: FSMContext):
         "summa": ""
     }
 
-    # Create a Pandas DataFrame from the dictionary
     df = pd.DataFrame(data_dict)
 
-    # Create an Excel writer using Pandas
     excel_file = "pro.xlsx"
     excel_writer = pd.ExcelWriter(excel_file, engine="openpyxl")
 
-    # Convert the DataFrame to an Excel sheet
     df.to_excel(excel_writer, index=False, sheet_name="Sheet1")
 
-    # Save the Excel file using the .save() method of the pandas ExcelWriter
     excel_writer._save()
     with open(excel_file, "rb") as f:
         input_file = InputFile(f)
@@ -104,7 +92,6 @@ async def free_handler(call: types.CallbackQuery, state: FSMContext):
     tg_username = [data_from_database[record][0].tg_username for record in range(len(data_from_database))]
     name = [data_from_database[record][0].name for record in range(len(data_from_database))]
 
-    # Create a dictionary to hold the data
     data_dict = {
         "chat_id": chat_ids,
         "Username": usernames,
@@ -114,17 +101,13 @@ async def free_handler(call: types.CallbackQuery, state: FSMContext):
         "summa": ""
     }
 
-    # Create a Pandas DataFrame from the dictionary
     df = pd.DataFrame(data_dict)
 
-    # Create an Excel writer using Pandas
     excel_file = "free.xlsx"
     excel_writer = pd.ExcelWriter(excel_file, engine="openpyxl")
 
-    # Convert the DataFrame to an Excel sheet
     df.to_excel(excel_writer, index=False, sheet_name="Sheet1")
 
-    # Save the Excel file using the .save() method of the pandas ExcelWriter
     excel_writer._save()
     with open(excel_file, "rb") as f:
         input_file = InputFile(f)

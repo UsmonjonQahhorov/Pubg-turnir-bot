@@ -3,13 +3,8 @@ import os
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
-from aiogram.dispatcher.filters import CommandStart, Text
-from aiogram.utils import callback_data
-from bot.buttons.inline_buttons import payment_button, payment_method, fill_balance, agree_or_disagree, \
-    with_balance
-from bot.buttons.reply_buttons import main_menu_buttons, balance_panel
-from bot.buttons.text import info, statistics, turnir, balance, fill, back_menu, uzcard, humo, hamyon, tether, payeer, \
-    withdraw, agree, cancel, turnir_stat
+from aiogram.dispatcher.filters import Text
+from bot.buttons.text import turnir_stat
 from bot.dispatcher import dp, bot
 from db.model import Players
 import json
@@ -56,4 +51,4 @@ async def handle_document(message: types.Message, state: FSMContext):
         await bot.send_file()
     else:
         await message.answer("Iltimos, Excel formatidagi faylni yuboring.")
-    await state.finish()  # Holatni tugatish
+    await state.finish()

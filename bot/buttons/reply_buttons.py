@@ -13,12 +13,6 @@ async def main_menu_buttons():
     return ReplyKeyboardMarkup(keyboard=design, resize_keyboard=True)
 
 
-# async def statistika_button():
-#     design = [
-#         [statistika]
-#     ]
-#     return ReplyKeyboardMarkup(keyboard=design, resize_keyboard=True)
-
 
 async def balance_panel():
     design = [

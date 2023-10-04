@@ -16,13 +16,6 @@ def load_json_data():
     return json_data
 
 
-#
-# def load_json_data_with():
-#     with open('dollar_currency_with', 'r') as json_file:
-#         json_data_with = json.load(json_file)
-#     return json_data_with
-
-
 @dp.callback_query_handler(lambda call: call.data in [uzcard, humo, hamyon, payeer, oson], state="summa_request")
 async def withdraw_method_handler(call: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
@@ -75,8 +68,8 @@ async def back_handler(msg: types.Message, state: FSMContext):
         player = await Players.get_by_chat_id(chat_id=user_id_str)
         if data["method"] == uzcard:
             prosent = (float(data["summa"]) / 100) * 0.5
-            cur_balance = float(data["summa"]) - prosent  # real balance olish
-            summ = cur_balance * dollar_cur_value  # summga otkizish
+            cur_balance = float(data["summa"]) - prosent
+            summ = cur_balance * dollar_cur_value
 
             admins_royxati = await main()
             for i in admins_royxati:
@@ -91,15 +84,15 @@ async def back_handler(msg: types.Message, state: FSMContext):
                             f"BALANCE💰: {player[0].balance}\n"
                             f"CARD_NUM💳: {card_num}\n"
                             f"USER YECHMOQCHI BOLGAN SUMMA: {float(data['summa'])}\n"
-                            # f"O'TKIZISHINGIZ KERAK BOLGAN SUMMA: {cur_balance}$\n"
+                            f"O'TKIZISHINGIZ KERAK BOLGAN SUMMA: {cur_balance}$\n"
                             f"UZB_SUM: {summ} SOM</b>")
                 await msg.bot.send_message(chat_id=i, reply_markup=await with_balance(state, user_id), text=msg_text,
                                            parse_mode="HTML")
 
         elif data["method"] == humo:
             prosent = (float(data["summa"]) / 100) * 1
-            cur_balance = float(data["summa"]) - prosent  # real balance olish
-            summ = cur_balance * dollar_cur_value  # summga otkizish
+            cur_balance = float(data["summa"]) - prosent
+            summ = cur_balance * dollar_cur_value
             admins_royxati = await main()
             for i in admins_royxati:
                 msg_text = (f"<b>Pull yechib olish uchun yangi so'rov‼\n\n"
@@ -113,15 +106,15 @@ async def back_handler(msg: types.Message, state: FSMContext):
                             f"BALANCE💰: {player[0].balance}\n"
                             f"CARD_NUM💳: {card_num}\n"
                             f"USER YECHMOQCHI BOLGAN SUMMA: {float(data['summa'])}\n"
-                            # f"O'TKIZISHINGIZ KERAK BOLGAN SUMMA: {cur_balance}$\n"
+                            f"O'TKIZISHINGIZ KERAK BOLGAN SUMMA: {cur_balance}$\n"
                             f"UZB_SUM: {summ} SOM</b>")
                 await msg.bot.send_message(chat_id=i, reply_markup=await with_balance(state, user_id), text=msg_text,
                                            parse_mode="HTML")
 
         elif data["method"] == payeer:
             prosent = (float(data["summa"]) / 100) * 4
-            cur_balance = float(data["summa"]) - prosent  # real balance olish
-            summ = cur_balance * dollar_cur_value  # summga otkizish
+            cur_balance = float(data["summa"]) - prosent
+            summ = cur_balance * dollar_cur_value
             admins_royxati = await main()
             for i in admins_royxati:
                 msg_text = (f"<b>Pull yechib olish uchun yangi so'rov‼\n\n"

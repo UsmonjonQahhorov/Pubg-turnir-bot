@@ -5,7 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from bot.buttons.text import payment, back, uzcard, humo, \
     hamyon, tether, payeer, fill, cancel, check_sub, begin, \
     subscribe, back_donat, tashladim, oson, update, username, \
-    tg_username, pubg_id, phone_number, done, agree  # Make sure to import the text values for the buttons
+    tg_username, pubg_id, phone_number, done, agree
 from bot.handlers.prices import pubg_mobile_prices
 
 
@@ -50,8 +50,6 @@ async def payment_method():
 
 
 async def fill_balance(chat_id: str):
-    # async with state.proxy() as data:
-    #     photo = data["photo_file_id"]
     design = [
         [InlineKeyboardButton(text="To'ldirish✅", callback_data=f"fill:{chat_id}")],
         [InlineKeyboardButton(text="Bekor qilish❎", callback_data=f"reject:{chat_id}")]
@@ -106,14 +104,6 @@ async def agree_or_dis_free(chat_id: str):
     ]
     return InlineKeyboardMarkup(inline_keyboard=design)
 
-
-#
-# async def fill_balance(chat_id: str):
-#     design = [
-#         [InlineKeyboardButton(text=fill, callback_data=chat_id)],
-#         [InlineKeyboardButton(text=cancel, callback_data=chat_id)]
-#     ]
-#     return InlineKeyboardMarkup(inline_keyboard=design)
 
 
 async def agree_or_disagree():
@@ -205,15 +195,6 @@ async def with_balance(state: FSMContext, user_id: str):
     ]
     return InlineKeyboardMarkup(inline_keyboard=design)
 
-
-# async def add_sub_food_button(state: FSMContext, product: json):
-#     design = [
-#         [InlineKeyboardButton(text="➖", callback_data=f"{state}: {product}"),
-#          InlineKeyboardButton(text=f"{[2]}", callback_data=f"save_{[2]}"),
-#          InlineKeyboardButton(text="➕", callback_data=f"+_{product['name']}")],
-#         [InlineKeyboardButton(text="Savatdan o'chirish 🛒", callback_data='del')]
-#     ]
-#     return InlineKeyboardMarkup(inline_keyboard=design)
 
 async def profil_button():
     design = [

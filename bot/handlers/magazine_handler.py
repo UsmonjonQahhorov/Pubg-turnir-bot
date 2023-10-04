@@ -9,9 +9,6 @@ from bot.buttons.text import info, statistics, turnir, balance, basic, pro, free
 from bot.dispatcher import dp, bot
 from aiogram import types
 
-from bot.handlers.admin_menu import main
-from db.model import User, Players
-
 
 @dp.message_handler(Text(magazine), state="menu")
 async def magazine_handler(msg: types.Message, state: FSMContext):

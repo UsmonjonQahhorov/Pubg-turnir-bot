@@ -13,12 +13,10 @@ from bot.buttons.text import info, statistics, turnir, balance, fill, back_menu,
     withdraw, agree, cancel, oson
 from bot.dispatcher import dp, bot
 from bot.handlers.withdraw_balance import load_json_data
-# from bot.handlers.withdraw_balance import json_data
+
 from db.model import Players, Admins
 import json
 
-
-# from .admin_menu import admins
 
 
 async def main():
@@ -31,7 +29,6 @@ async def balance_menu_handler(msg: types.Message, state: FSMContext):
     chat_id = msg.from_user.id
     chat_id_str = str(chat_id)
     player = await Players.get_by_chat_id(chat_id=chat_id_str)
-    # print(player)
     if player:
         await msg.answer(text="Balance Menu", reply_markup=await balance_panel())
         await state.set_state("balance")
@@ -57,9 +54,9 @@ async def fill_handler(msg: types.Message, state: FSMContext):
         summa = float(msg.text)
     except ValueError:
         await msg.answer("Notogri summa kirgizdingiz! Summani raqam shaklida kiriting.")
-        return  # Return to the previous state without setting a new state
+        return
 
-    if summa < 5:  # Check if summa is less than the minimum allowed amount
+    if summa < 5:
         await msg.answer("Minimal Pul kiritish 5$.")
     else:
         json_data = load_json_data()
@@ -129,31 +126,6 @@ async def handle_photo(message: types.Message, state: FSMContext):
         print(f"Error in chek3_handler: {e}")
 
 
-# @dp.callback_query_handler(lambda call: call.data.startswith("fill"), state='*')
-# async def chek3_handler(call: types.CallbackQuery, state: FSMContext):
-#     try:
-#         global photo_file_id
-#         json_data = load_json_data()
-#         dollar_cur_value = float(json_data["dollar_cur"])
-#         photo = await bot.get_file(photo_file_id)
-#         async with state.proxy() as data:
-#             if photo:
-#                 admins_royxati = await main()
-#                 print(data)
-#                 for i in admins_royxati:
-#                     caption_text = (
-#                         f"👤Balance to'ldirish uchun yangi so'rov\n 📄Chekni tekshiring‼️\n\n🆔ID: {call.from_user.id}\n"
-#                         f"📝Ism-Familia: {call.from_user.full_name}\n©️Username: @{call.from_user.username}\n"
-#                         f"User o'z hisobiga {data['entered_summa']}$ || {dollar_cur_value * int(data['entered_summa'])} somga to'ldirmoqchi")
-#                     await call.bot.send_photo(chat_id=i, photo=photo.file_id,
-#                                               reply_markup=await fill_balance(data["user_id"]),
-#                                               caption=caption_text)
-#             else:
-#                 print("Photo file ID is missing in data.")
-#     except Exception as e:
-#         print(f"Error in chek3_handler: {e}")
-
-
 @dp.callback_query_handler(lambda call: call.data.startswith("reject"), state="*")
 async def what_delete_handler(call: types.CallbackQuery, state: FSMContext):
     await call.message.delete()
@@ -210,7 +182,6 @@ async def update_balance(call: types.CallbackQuery, state: FSMContext):
         pass
     async with state.proxy() as data:
         chat_id = data["chat_id"]
-        # photo_file_id = data["photo_file_id"]
         summa = data.get("summa")
         print(data)
     user_id_str = str(chat_id)
@@ -256,7 +227,6 @@ async def back_handler(msg: types.Message, state: FSMContext):
     await msg.delete()
     await msg.answer(text=f"<b>{msg.from_user.full_name} asosiy bo'limdasiz✅\n\nBo'limlardan birini tanlang⬇️</b>",
                      reply_markup=await main_menu_buttons(), parse_mode='HTML')
-    # await state.finish()
 
 
 """Yechish"""

@@ -55,27 +55,11 @@ async def donat_handler(call: types.CallbackQuery, state: FSMContext):
     except:
         pass
     donat_amount = call.data
-    # donat_summa = donat[2]
-    # print(donat_summa)
     async with state.proxy() as data:
         data["donat_amount"] = donat_amount
     await call.message.answer("<i>Sizga arzon narxlarda ID orqali donat qilib beriladi✅ Rozimisiz❓</i>",
                               reply_markup=await agree_donat_button(), parse_mode="HTML")
     await state.set_state("agree_donat")
-
-
-#
-# @dp.callback_query_handler(Text(agree), state="agree_donat")
-# async def agree_donat(call: types.CallbackQuery, state: FSMContext):
-#     try:
-#         await bot.delete_message(call.from_user.id, call.message.message_id - 1)
-#     except:
-#         pass
-#     await call.message.answer("ID yingizni jonating📨", reply_markup=await messangers())
-#     await state.set_state("choose_messanger")
-
-
-"""google entry"""
 
 
 @dp.callback_query_handler(lambda call: call.data.startswith(agree), state="agree_donat")
@@ -187,105 +171,8 @@ async def handle_fill_callback(call: types.CallbackQuery, state: FSMContext):
                                                  f"Siz bilan ishlaganimizdan minnatdormiz😉",
                            parse_mode="HTML")
     await bot.send_message(chat_id=-1001858175397, text=f"<i>Donat bajarildi</i>\n\n"
-                                                                         f"Username: {list_[2]}\n"
-                                                                         f"TG_Username: {list_[3]}\n"
-                                                                         f"Donat miqdori: {list_[4]}\n",
-                         parse_mode="HTML")
+                                                        f"Username: {list_[2]}\n"
+                                                        f"TG_Username: {list_[3]}\n"
+                                                        f"Donat miqdori: {list_[4]}\n",
+                           parse_mode="HTML")
     await call.message.delete()
-
-    """google entry end"""
-
-    #
-    # @dp.callback_query_handler(Text("Facebook"), state="choose_messanger")
-    # async def choose_donat(call: types.CallbackQuery, state: FSMContext):
-    #     try:
-    #         await bot.delete_message(call.from_user.id, call.message.message_id - 1)
-    #     except:
-    #         pass
-    #     async with state.proxy() as data:
-    #         data['messenger'] = call.data
-    #     await call.message.answer("Telefon nomeringizni kiriting📞:")
-    #     await state.set_state("number_facebook")
-    #
-    #
-    # @dp.message_handler(state="number_facebook")
-    # async def phone_donat(msg: types.Message, state: FSMContext):
-    #     async with state.proxy() as data:
-    #         data['phone_number_donat'] = msg.text
-    #     await msg.answer("Parollni kiriting🛡")
-    #     await state.set_state("password_f")
-    #
-    #
-    # @dp.message_handler(state="password_f")
-    # async def password_donat(msg: types.Message, state: FSMContext):
-    #     async with state.proxy() as data:
-    #         data["password_f"] = msg.text
-    #         caption = f"""<b>💰To'lovni quyidagi usullar orqali amalga oshirishingiz mumkin.✅
-    #                 HUMO: 9860 1901 0161 8410💳
-    #                 Mastercard:5477 3300 2158 8151💳
-    #                 👤Karta: Palonchiev Pistonchi nomida✅
-    #                 QIWI: +79786955567✅
-    #                 Telefon nomer📞: {data['phone_number_donat']}
-    #                 Password: {data['password_f']}
-    #                 👨‍💻Toʻloʻv qilishda muammo boʻlsa: @hayitvoy_official
-    #                 🧾toʻloʻv cheki boʻlishi shart‼️\n\nTo'lo'v qildingizmi❓</b>"""
-    #         reply_markup = await yes_or_no_users()
-    #
-    #     await msg.answer(caption, parse_mode="HTML", reply_markup=reply_markup)
-    #     await state.set_state("facebook")
-    #
-    #
-    # @dp.callback_query_handler(Text([tashladim, back_donat]), state='facebook')
-    # async def yes_or_no_users_handler(call: types.CallbackQuery, state: FSMContext):
-    #     try:
-    #         await bot.delete_message(call.from_user.id, call.message.message_id - 1)
-    #     except:
-    #         pass
-    #     await call.message.delete()
-    #     if call.data == tashladim:
-    #         await state.set_state("chek_photo")
-    #         await call.message.answer(text="<b>Chek rasmini jo`nating🖼</b>", parse_mode="HTML",
-    #                                   reply_markup=await main_menu_buttons())
-    #     else:
-    #         await call.message.answer(
-    #             text=f"<b>{call.from_user.full_name} asosiy bo'limdasiz✅\n\nBo'limlardan birini tanlang⬇️</b>",
-    #             parse_mode="HTML",
-    #             reply_markup=await main_menu_buttons())
-    #     await state.set_state("facebook_chek")
-    #
-    #
-    # @dp.message_handler(content_types=types.ContentType.PHOTO, state="facebook_chek")
-    # async def handle_photo(message: types.Message, state: FSMContext):
-    #     user_id = message.from_user.id
-    #     try:
-    #         await bot.delete_message(message.from_user.id, message.message_id - 1)
-    #     except:
-    #         pass
-    #     async with state.proxy() as data:
-    #         data["user_id"] = user_id
-    #         photo_file_id = message.photo[-1].file_id
-    #         admins_royxati = await main()
-    #         for i in admins_royxati:
-    #             async with state.proxy() as data:
-    #                 donat_amount = data["donat_amount"]
-    #             caption = (f"🆕Yangi buyurtma☑\n\n"
-    #                        f"🛒Miqdor: {donat_amount}\n"
-    #                        f"🚪Kirish: {data['messenger']}\n"
-    #                        f"Phone_Number📞: {data['phone_number_donat']}\n"
-    #                        f"Password🛡: {data['password_f']}\n"
-    #                        f"Donat UC: {data['donat_amount']}")
-    #             await message.bot.send_photo(chat_id=i, caption=caption, parse_mode="HTML", photo=photo_file_id,
-    #                                          reply_markup=await donat_button(chat_id=user_id))
-    # await state.set_state("face_com")
-
-    # @dp.callback_query_handler(lambda call: call.data.startswith("donat"), state="face_com")
-    # async def handle_fill_callback(call: types.CallbackQuery, state: FSMContext):
-    #     try:
-    #         await bot.delete_message(call.from_user.id, call.message.message_id - 1)
-    #     except:
-    #         pass
-    #     async with state.proxy() as data:
-    #         user_id = data["user_id"]
-    #         await bot.send_message(chat_id=user_id, text=f"<i>Sizga muafaqiyatli donat qilib berildi👌</i>\n"
-    #                                                      f"Siz bilan ishlaganimizdan minnatdormiz😉",
-    #                                parse_mode="HTML")
