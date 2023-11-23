@@ -1,13 +1,9 @@
 # Pubg_turner_bot
-## Telegram bot for pubg turnier_bot
-
-<p align="center">
-<!--  <img src="https://raw.githubusercontent.com/azimjohn/ustoztop/master/screen.png" width="500"> -->
-</p>
+## Telegram bot for pubg turnier
 
 ### First get the repo on your machine:
 ```bash
-$ git clone https://github.com/UsmonjonQahhorov/Miss_and_Misters.git
+$ git clone https://github.com/UsmonjonQahhorov/Pubg-turnir-bot.git
 ```
 
 
